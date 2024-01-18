@@ -115,5 +115,28 @@ Question scienceQuestions[NumOfQuestions] = {
 
 int main()
 {
+    int questionChoice;
     std::cout << "Welcome to the Quiz Game!" << std::endl;
+questionSelect:
+    std::cout << "Please select one of the following genres to start the game." << std::endl;
+    std::cout << "Press 1 for Football Questions." << std::endl;
+    std::cout << "Press 2 for Movies Questions." << std::endl;
+    std::cout << "Press 3 for Science Questions." << std::endl;
+    std::cout << "Enter your choice: ";
+    std::cin >> questionChoice;
+    switch (questionChoice)
+    {
+    case 1:
+        std::cout << "Starting Football Trivia..." << std::endl;
+        break;
+    case 2:
+        std::cout << "Starting Movies Trivia..." << std::endl;
+        break;
+    case 3:
+        std::cout << "Starting Science Trivia..." << std::endl;
+        break;
+    default:
+        std::cout << "Please enter a valid option!" << std::endl;
+        goto questionSelect;
+    }
 }
