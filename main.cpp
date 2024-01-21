@@ -1,6 +1,8 @@
 #include <iostream>
 #include <string>
 #include <vector>
+#include <cstdlib>  
+#include <ctime>
 
 using namespace std;
 const int NumOfQuestions = 30;
@@ -11,9 +13,10 @@ struct Question
     string questionText;
     char correctOption;
     vector<string> options;
+    bool isAsked = false;
 };
 
-Question sportsQuestions[NumOfQuestions] = {
+Question footballQuestions[NumOfQuestions] = {
     {"Which country won the FIFA World Cup in 2018?", 'C', {"Brazil", "Germany", "France", "Croatia"}},
     {"Who holds the record for the most Olympic gold medals in athletics?", 'A', {"Usain Bolt", "Michael Phelps", "Carl Lewis", "Jesse Owens"}},
     {"Which football club has won the most UEFA Champions League titles?", 'B', {"Real Madrid", "FC Barcelona", "AC Milan", "Bayern Munich"}},
@@ -114,9 +117,42 @@ Question scienceQuestions[NumOfQuestions] = {
 
 };
 
+
+void displayQuestions(Question questions[], int numOfQuestions) //Takes in 2 arguments - array of questions and number of questions
+{
+
+    srand(time(0)); //seed random number generator
+    for (int i = 0; i < numOfQuestions; i++)
+    {
+
+         int randomIndex;
+        do {
+            randomIndex = rand() % numOfQuestions;
+           }while (questions[randomIndex].isAsked);
+        //Keeps creating a random number until it finds a question that is not asked
+
+        cout << "Question " << i + 1 << ": " << questions[randomIndex].questionText << endl;
+        for (int j = 0; j < questions[randomIndex].options.size(); j++)
+        {
+            cout << "  " << char('A' + j) << ". " << questions[randomIndex].options[j] << endl;
+        }
+         questions[randomIndex].isAsked = true;
+        cout << endl;
+    }
+
+    //Resets questions after all questions are asked
+    for(int i=0;i<numOfQuestions;i++){
+        questions[i].isAsked=false;
+    }
+}
+
+
+
 int main()
 {
     int questionChoice;
+    char playAgain;
+
     cout << "Welcome to the Quiz Game!" << endl;
 questionSelect:
     cout << "Please select one of the following genres to start the game." << endl;
@@ -128,13 +164,57 @@ questionSelect:
     switch (questionChoice)
     {
     case 1:
+    cout<<"----------------------------------------"<<endl;
         cout << "Starting Football Trivia..." << endl;
+    cout<<"----------------------------------------"<<endl;
+
+        displayQuestions(footballQuestions, NumOfQuestions); //Passes the array of questions and number of questions to the function
+
+        cout<<"----------------------------------------"<<endl;
+        cout<<"Do you want to play again? (Y/N)"<<endl;
+        
+        cin>>playAgain;
+        if(playAgain=='Y'||playAgain=='y'){
+            goto questionSelect;
+        }
+        else{
+            cout<<"Thank you for playing our Quiz Game!"<<endl;
+        }
         break;
     case 2:
+    cout<<"----------------------------------------"<<endl;
+
         cout << "Starting Movies Trivia..." << endl;
+    cout<<"----------------------------------------"<<endl;
+
+displayQuestions(movieQuestions, NumOfQuestions);
+cout<<"----------------------------------------"<<endl;
+        cout<<"Do you want to play again? (Y/N)"<<endl;
+        
+        cin>>playAgain;
+        if(playAgain=='Y'||playAgain=='y'){
+            goto questionSelect;
+        }
+        else{
+            cout<<"Thank you for playing our Quiz Game!"<<endl;
+        }
         break;
     case 3:
+    cout<<"----------------------------------------"<<endl;
+
         cout << "Starting Science Trivia..." << endl;
+    cout<<"----------------------------------------"<<endl;
+displayQuestions(scienceQuestions, NumOfQuestions);
+cout<<"----------------------------------------"<<endl;
+        cout<<"Do you want to play again? (Y/N)"<<endl;
+        
+        cin>>playAgain;
+        if(playAgain=='Y'||playAgain=='y'){
+            goto questionSelect;
+        }
+        else{
+            cout<<"Thank you for playing our Quiz Game!"<<endl;
+        }
         break;
     default:
         cout << "Please enter a valid option!" << endl;
