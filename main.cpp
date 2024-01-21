@@ -6,6 +6,7 @@
 
 using namespace std;
 const int NumOfQuestions = 30;
+int score = 0;
 
 struct Question
 {
@@ -14,6 +15,12 @@ struct Question
     char correctOption;
     vector<string> options;
     bool isAsked = false;
+};
+
+struct User
+{
+    string name;
+    int score;
 };
 
 Question footballQuestions[NumOfQuestions] = {
@@ -137,6 +144,7 @@ void displayQuestions(Question questions[], int numOfQuestions) // Takes in 2 ar
         }
         questions[randomIndex].isAsked = true;
         cout << endl;
+        // The following asks the user for an answer and checks if it is correct by comparing both.
         char userAnswer;
         cout << "Enter your answer: ";
         cin >> userAnswer;
@@ -144,10 +152,13 @@ void displayQuestions(Question questions[], int numOfQuestions) // Takes in 2 ar
         if (userAnswer == questions[randomIndex].correctOption)
         {
             cout << "You guessed the right answer!" << endl;
+            score += 10;
+            cout << "Your current score is: " << score << endl;
         }
         else
         {
             cout << "Wrong answer." << endl;
+            cout << "Your current score is: " << score << endl;
         }
         cout << endl;
     }
@@ -161,10 +172,36 @@ void displayQuestions(Question questions[], int numOfQuestions) // Takes in 2 ar
 
 int main()
 {
-    int questionChoice;
-    char playAgain;
+    vector<User> users; // creates an empty vector of users
 
-    cout << "Welcome to the Quiz Game!" << endl;
+    int questionChoice;
+    char playAgain, newUser;
+    string userName;
+
+    cout << "Please enter your name: ";
+    cin >> userName;
+
+    cout << endl;
+    cout << "----------------------------------------" << endl;
+    cout << "Welcome " << userName << "! To our Quiz Game." << endl;
+    cout << "----------------------------------------" << endl;
+
+    if (users.size() > 0)
+    {
+        cout << "The current leaderboard is: " << endl;
+
+        for (int i = 0; i < users.size(); i++)
+        {
+            cout << users[i].name << " - " << users[i].score << endl;
+        }
+        cout << "----------------------------------------" << endl;
+    }
+    else
+    {
+        cout << "There are no users in the leaderboard yet." << endl;
+        cout << "----------------------------------------" << endl;
+    }
+
 questionSelect:
     cout << "Please select one of the following genres to start the game." << endl;
     cout << "Press 1 for Football Questions." << endl;
@@ -192,6 +229,36 @@ questionSelect:
         else
         {
             cout << "Thank you for playing our Quiz Game!" << endl;
+            cout << "Do you want another user? (Y/N)" << endl;
+            cin >> newUser;
+            users.push_back({userName, score});
+
+            if (newUser == 'Y' || newUser == 'y')
+            {
+                score = 0;
+
+                cout << "----------------------------------------" << endl;
+                cout << "Starting a new game..." << endl;
+                cout << "----------------------------------------" << endl;
+                cout << "The current leaderboard is: " << endl;
+                for (int i = 0; i < users.size(); i++)
+                {
+                    cout << users[i].name << " - " << users[i].score << endl;
+                }
+
+                cout << "Please enter your name: ";
+                cin >> userName;
+                goto questionSelect;
+            }
+            else
+            {
+                cout << "Thank you for playing our Quiz Game!" << endl;
+            }
+            cout << "The current leaderboard is: " << endl;
+            for (int i = 0; i < users.size(); i++)
+            {
+                cout << users[i].name << " - " << users[i].score << endl;
+            }
         }
         break;
     case 2:
@@ -212,6 +279,36 @@ questionSelect:
         else
         {
             cout << "Thank you for playing our Quiz Game!" << endl;
+            cout << "Do you want another user? (Y/N)" << endl;
+            cin >> newUser;
+            users.push_back({userName, score});
+
+            if (newUser == 'Y' || newUser == 'y')
+            {
+                score = 0;
+
+                cout << "----------------------------------------" << endl;
+                cout << "Starting a new game..." << endl;
+                cout << "----------------------------------------" << endl;
+                cout << "The current leaderboard is: " << endl;
+                for (int i = 0; i < users.size(); i++)
+                {
+                    cout << users[i].name << " - " << users[i].score << endl;
+                }
+
+                cout << "Please enter your name: ";
+                cin >> userName;
+                goto questionSelect;
+            }
+            else
+            {
+                cout << "Thank you for playing our Quiz Game!" << endl;
+            }
+            cout << "The current leaderboard is: " << endl;
+            for (int i = 0; i < users.size(); i++)
+            {
+                cout << users[i].name << " - " << users[i].score << endl;
+            }
         }
         break;
     case 3:
@@ -231,6 +328,35 @@ questionSelect:
         else
         {
             cout << "Thank you for playing our Quiz Game!" << endl;
+            cout << "Do you want another user? (Y/N)" << endl;
+            cin >> newUser;
+            users.push_back({userName, score});
+
+            if (newUser == 'Y' || newUser == 'y')
+            {
+                score = 0;
+                cout << "----------------------------------------" << endl;
+                cout << "Starting a new game..." << endl;
+                cout << "----------------------------------------" << endl;
+                cout << "The current leaderboard is: " << endl;
+                for (int i = 0; i < users.size(); i++)
+                {
+                    cout << users[i].name << " - " << users[i].score << endl;
+                }
+
+                cout << "Please enter your name: ";
+                cin >> userName;
+                goto questionSelect;
+            }
+            else
+            {
+                cout << "Thank you for playing our Quiz Game!" << endl;
+            }
+            cout << "The current leaderboard is: " << endl;
+            for (int i = 0; i < users.size(); i++)
+            {
+                cout << users[i].name << " - " << users[i].score << endl;
+            }
         }
         break;
     default:
