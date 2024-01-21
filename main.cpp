@@ -6,7 +6,7 @@ const int NumOfQuestions = 30;
 
 struct Question
 {
-    // Our schema for the questions
+    // Our schema for the questionsdd
     std::string questionText;
     char correctOption;
     std::vector<std::string> options;
