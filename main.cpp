@@ -2,14 +2,15 @@
 #include <string>
 #include <vector>
 
+using namespace std;
 const int NumOfQuestions = 30;
 
 struct Question
 {
     // Our schema for the questionsdd
-    std::string questionText;
+    string questionText;
     char correctOption;
-    std::vector<std::string> options;
+    vector<string> options;
 };
 
 Question sportsQuestions[NumOfQuestions] = {
@@ -116,27 +117,27 @@ Question scienceQuestions[NumOfQuestions] = {
 int main()
 {
     int questionChoice;
-    std::cout << "Welcome to the Quiz Game!" << std::endl;
+    cout << "Welcome to the Quiz Game!" << endl;
 questionSelect:
-    std::cout << "Please select one of the following genres to start the game." << std::endl;
-    std::cout << "Press 1 for Football Questions." << std::endl;
-    std::cout << "Press 2 for Movies Questions." << std::endl;
-    std::cout << "Press 3 for Science Questions." << std::endl;
-    std::cout << "Enter your choice: ";
-    std::cin >> questionChoice;
+    cout << "Please select one of the following genres to start the game." << endl;
+    cout << "Press 1 for Football Questions." << endl;
+    cout << "Press 2 for Movies Questions." << endl;
+    cout << "Press 3 for Science Questions." << endl;
+    cout << "Enter your choice: ";
+    cin >> questionChoice;
     switch (questionChoice)
     {
     case 1:
-        std::cout << "Starting Football Trivia..." << std::endl;
+        cout << "Starting Football Trivia..." << endl;
         break;
     case 2:
-        std::cout << "Starting Movies Trivia..." << std::endl;
+        cout << "Starting Movies Trivia..." << endl;
         break;
     case 3:
-        std::cout << "Starting Science Trivia..." << std::endl;
+        cout << "Starting Science Trivia..." << endl;
         break;
     default:
-        std::cout << "Please enter a valid option!" << std::endl;
+        cout << "Please enter a valid option!" << endl;
         goto questionSelect;
     }
 }
