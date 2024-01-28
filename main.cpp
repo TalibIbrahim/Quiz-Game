@@ -123,16 +123,16 @@ Question scienceQuestions[NumOfQuestions] = {
 
 };
 
-void displayQuestions(Question questions[], int numOfQuestions) // Takes in 2 arguments - array of questions and number of questions
+void displayQuestions(Question questions[], int numOfQuestions, int questionsToAsk) // Takes in 2 arguments - array of questions and number of questions
 {
     int randomIndex;
     srand(time(0)); // seed random number generator
-    for (int i = 0; i < numOfQuestions; i++)
+    for (int i = 0; i < questionsToAsk; i++)
     {
 
         do
         {
-            randomIndex = rand() % numOfQuestions;
+            randomIndex = rand() % questionsToAsk;
         } while (questions[randomIndex].isAsked);
         // Keeps creating a random number until it finds a question that is not asked
 
@@ -171,7 +171,9 @@ void displayQuestions(Question questions[], int numOfQuestions) // Takes in 2 ar
 
 int main()
 {
-    vector<User> users; // creates an empty vector of users
+    int questionsToAsk;
+    vector<User>
+        users; // creates an empty vector of users
 
     int questionChoice;
     char playAgain, newUser;
@@ -201,6 +203,43 @@ int main()
         cout << "----------------------------------------" << endl;
     }
 
+gameModeSelect:
+    cout << "Select Game Mode: " << endl;
+    cout << "Press 1 for 10 Questions Mode" << endl;
+    cout << "Press 2 for 15 Questions Mode" << endl;
+    cout << "Press 3 for Practice Mode" << endl;
+    cout << "Enter your choice: ";
+    cin >> questionsToAsk;
+
+    switch (questionsToAsk)
+    {
+    case 1:
+        questionsToAsk = 10;
+        cout << "----------------------------------------" << endl;
+        cout << "You have selected 10 Questions Mode." << endl;
+        cout << "----------------------------------------" << endl;
+        break;
+    case 2:
+        questionsToAsk = 15;
+        cout << "----------------------------------------" << endl;
+        cout << "You have selected 15 Questions Mode." << endl;
+        cout << "----------------------------------------" << endl;
+
+        break;
+    case 3:
+        questionsToAsk = 30;
+        cout << "----------------------------------------" << endl;
+        cout << "You have selected Practice Mode. You will be asked all the questions." << endl;
+        cout << "----------------------------------------" << endl;
+
+        break;
+    default:
+        cout << "----------------------------------------" << endl;
+        cout << "Please enter a valid option!" << endl;
+        cout << "----------------------------------------" << endl;
+        goto gameModeSelect;
+    }
+
 questionSelect:
     cout << "Please select one of the following genres to start the game." << endl;
     cout << "Press 1 for Football Questions." << endl;
@@ -208,6 +247,8 @@ questionSelect:
     cout << "Press 3 for Science Questions." << endl;
     cout << "Enter your choice: ";
     cin >> questionChoice;
+
+    cout << "----------------------------------------" << endl;
     switch (questionChoice)
     {
     case 1:
@@ -215,7 +256,7 @@ questionSelect:
         cout << "Starting Football Trivia..." << endl;
         cout << "----------------------------------------" << endl;
 
-        displayQuestions(footballQuestions, NumOfQuestions); // Passes the array of questions and number of questions to the function
+        displayQuestions(footballQuestions, NumOfQuestions, questionsToAsk); // Passes the array of questions and number of questions to the function
 
         cout << "----------------------------------------" << endl;
         cout << "Do you want to play again? (Y/N)" << endl;
@@ -223,7 +264,7 @@ questionSelect:
         cin >> playAgain;
         if (playAgain == 'Y' || playAgain == 'y')
         {
-            goto questionSelect;
+            goto gameModeSelect;
         }
         else
         {
@@ -247,7 +288,7 @@ questionSelect:
 
                 cout << "Please enter your name: ";
                 cin >> userName;
-                goto questionSelect;
+                goto gameModeSelect;
             }
             else
             {
@@ -266,14 +307,14 @@ questionSelect:
         cout << "Starting Movies Trivia..." << endl;
         cout << "----------------------------------------" << endl;
 
-        displayQuestions(movieQuestions, NumOfQuestions);
+        displayQuestions(movieQuestions, NumOfQuestions, questionsToAsk);
         cout << "----------------------------------------" << endl;
         cout << "Do you want to play again? (Y/N)" << endl;
 
         cin >> playAgain;
         if (playAgain == 'Y' || playAgain == 'y')
         {
-            goto questionSelect;
+            goto gameModeSelect;
         }
         else
         {
@@ -297,7 +338,7 @@ questionSelect:
 
                 cout << "Please enter your name: ";
                 cin >> userName;
-                goto questionSelect;
+                goto gameModeSelect;
             }
             else
             {
@@ -315,14 +356,14 @@ questionSelect:
 
         cout << "Starting Science Trivia..." << endl;
         cout << "----------------------------------------" << endl;
-        displayQuestions(scienceQuestions, NumOfQuestions);
+        displayQuestions(scienceQuestions, NumOfQuestions, questionsToAsk);
         cout << "----------------------------------------" << endl;
         cout << "Do you want to play again? (Y/N)" << endl;
 
         cin >> playAgain;
         if (playAgain == 'Y' || playAgain == 'y')
         {
-            goto questionSelect;
+            goto gameModeSelect;
         }
         else
         {
@@ -345,7 +386,7 @@ questionSelect:
 
                 cout << "Please enter your name: ";
                 cin >> userName;
-                goto questionSelect;
+                goto gameModeSelect;
             }
             else
             {
@@ -359,7 +400,10 @@ questionSelect:
         }
         break;
     default:
+        cout << "----------------------------------------" << endl;
         cout << "Please enter a valid option!" << endl;
+        cout << "----------------------------------------" << endl;
+
         goto questionSelect;
     }
 }
