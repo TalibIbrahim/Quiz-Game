@@ -12,9 +12,13 @@ To successfully build and run this project, ensure that you have the following p
 To install and run this project, follow these steps:
 
 1. **Clone the Repository:**
+Clone the repository using:
+```
+git clone https://github.com/TalibIbrahim/Quiz-Game.git
+```
 Or download the repository as a ZIP file and extract it to your desired location.
 
-2. **Run the Executable:**
+3. **Run the Executable:**
 - Navigate to the project directory.
 - Execute the `.exe` file:
   ```
