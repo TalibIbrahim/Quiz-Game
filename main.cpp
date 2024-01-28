@@ -168,7 +168,15 @@ void displayQuestions(Question questions[], int numOfQuestions, int questionsToA
         questions[i].isAsked = false;
     }
 }
+void displayLeaderboard()
+{
+    cout << "The current leaderboard is: " << endl;
 
+    for (int i = 0; i < users.size(); i++)
+    {
+        cout << users[i].name << " : " << users[i].score << endl;
+    }
+}
 int main()
 {
     int questionsToAsk;
@@ -193,7 +201,7 @@ int main()
 
         for (int i = 0; i < users.size(); i++)
         {
-            cout << users[i].name << " - " << users[i].score << endl;
+            cout << users[i].name << " : " << users[i].score << endl;
         }
         cout << "----------------------------------------" << endl;
     }
