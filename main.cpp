@@ -134,8 +134,8 @@ void displayQuestions(Question questions[], int numOfQuestions, int questionsToA
         {
             randomIndex = rand() % questionsToAsk;
         } while (questions[randomIndex].isAsked);
-        // Keeps creating a random number until it finds a question that is not asked
-
+    // Keeps creating a random number until it finds a question that is not asked
+    retryOption:
         cout << "Question " << i + 1 << ": " << questions[randomIndex].questionText << endl;
         for (int j = 0; j < questions[randomIndex].options.size(); j++)
         {
@@ -147,19 +147,27 @@ void displayQuestions(Question questions[], int numOfQuestions, int questionsToA
         char userAnswer;
         cout << "Enter your answer: ";
         cin >> userAnswer;
-        userAnswer = toupper(userAnswer);
-        if (userAnswer == questions[randomIndex].correctOption)
+        if (userAnswer == 'a' || userAnswer == 'b' || userAnswer == 'c' || userAnswer == 'd' || userAnswer == 'A' || userAnswer == 'B' || userAnswer == 'C' || userAnswer == 'D')
         {
-            cout << "You guessed the right answer!" << endl;
-            score += 10;
-            cout << "Your current score is: " << score << endl;
+            userAnswer = toupper(userAnswer); // To transform the user input to uppercase because the answer in database is saved in uppercase.
+            if (userAnswer == questions[randomIndex].correctOption)
+            {
+                cout << "You guessed the right answer!" << endl;
+                score += 10;
+                cout << "Your current score is: " << score << endl;
+            }
+            else
+            {
+                cout << "Wrong answer." << endl;
+                cout << "Your current score is: " << score << endl;
+            }
+            cout << endl;
         }
         else
         {
-            cout << "Wrong answer." << endl;
-            cout << "Your current score is: " << score << endl;
+            cout << "Choose a valid option!" << endl;
+            goto retryOption;
         }
-        cout << endl;
     }
 
     // Resets questions after all questions are asked
@@ -168,15 +176,7 @@ void displayQuestions(Question questions[], int numOfQuestions, int questionsToA
         questions[i].isAsked = false;
     }
 }
-void displayLeaderboard()
-{
-    cout << "The current leaderboard is: " << endl;
 
-    for (int i = 0; i < users.size(); i++)
-    {
-        cout << users[i].name << " : " << users[i].score << endl;
-    }
-}
 int main()
 {
     int questionsToAsk;
@@ -187,7 +187,7 @@ int main()
     char playAgain, newUser;
     string userName;
 
-    cout << "Please enter your name: ";
+    cout << "Please enter your first name: ";
     cin >> userName;
 
     cout << endl;
