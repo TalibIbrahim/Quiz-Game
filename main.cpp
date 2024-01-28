@@ -184,7 +184,7 @@ int main()
 
     cout << endl;
     cout << "----------------------------------------" << endl;
-    cout << "Welcome " << userName << "! To our Quiz Game." << endl;
+    cout << "Welcome to our Quiz Game " << userName << endl;
     cout << "----------------------------------------" << endl;
 
     if (users.size() > 0)
@@ -283,7 +283,7 @@ questionSelect:
                 cout << "The current leaderboard is: " << endl;
                 for (int i = 0; i < users.size(); i++)
                 {
-                    cout << users[i].name << " - " << users[i].score << endl;
+                    cout << users[i].name << " : " << users[i].score << endl;
                 }
 
                 cout << "Please enter your name: ";
@@ -297,7 +297,7 @@ questionSelect:
             cout << "The current leaderboard is: " << endl;
             for (int i = 0; i < users.size(); i++)
             {
-                cout << users[i].name << " - " << users[i].score << endl;
+                cout << users[i].name << " : " << users[i].score << endl;
             }
         }
         break;
@@ -333,7 +333,7 @@ questionSelect:
                 cout << "The current leaderboard is: " << endl;
                 for (int i = 0; i < users.size(); i++)
                 {
-                    cout << users[i].name << " - " << users[i].score << endl;
+                    cout << users[i].name << " : " << users[i].score << endl;
                 }
 
                 cout << "Please enter your name: ";
@@ -347,7 +347,7 @@ questionSelect:
             cout << "The current leaderboard is: " << endl;
             for (int i = 0; i < users.size(); i++)
             {
-                cout << users[i].name << " - " << users[i].score << endl;
+                cout << users[i].name << " : " << users[i].score << endl;
             }
         }
         break;
@@ -381,7 +381,7 @@ questionSelect:
                 cout << "The current leaderboard is: " << endl;
                 for (int i = 0; i < users.size(); i++)
                 {
-                    cout << users[i].name << " - " << users[i].score << endl;
+                    cout << users[i].name << " : " << users[i].score << endl;
                 }
 
                 cout << "Please enter your name: ";
@@ -395,7 +395,7 @@ questionSelect:
             cout << "The current leaderboard is: " << endl;
             for (int i = 0; i < users.size(); i++)
             {
-                cout << users[i].name << " - " << users[i].score << endl;
+                cout << users[i].name << " : " << users[i].score << endl;
             }
         }
         break;
