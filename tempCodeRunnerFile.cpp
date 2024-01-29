@@ -22,8 +22,6 @@ struct User
     int score;
 };
 
-vector<User> users; // creates an empty vector of users
-
 Question footballQuestions[NumOfQuestions] = {
     {"Which country won the FIFA World Cup in 2018?", 'C', {"Brazil", "Germany", "France", "Croatia"}},
     {"Who holds the record for the most Olympic gold medals in athletics?", 'A', {"Carl Lewis", "Usain Bolt", "Michael Phelps", "Jesse Owens"}},
@@ -134,10 +132,10 @@ void displayQuestions(Question questions[], int numOfQuestions, int questionsToA
 
         do
         {
-            randomIndex = rand() % numOfQuestions;
+            randomIndex = rand() % questionsToAsk;
         } while (questions[randomIndex].isAsked);
-    // Keeps creating a random number until it finds a question that is not asked
-    retryOption:
+        // Keeps creating a random number until it finds a question that is not asked
+
         cout << "Question " << i + 1 << ": " << questions[randomIndex].questionText << endl;
         for (int j = 0; j < questions[randomIndex].options.size(); j++)
         {
@@ -149,53 +147,25 @@ void displayQuestions(Question questions[], int numOfQuestions, int questionsToA
         char userAnswer;
         cout << "Enter your answer: ";
         cin >> userAnswer;
-        userAnswer = toupper(userAnswer); // To transform the user input to uppercase because the answer in database is saved in uppercase.
-        if (userAnswer == 'A' || userAnswer == 'B' || userAnswer == 'C' || userAnswer == 'D')
+        userAnswer = toupper(userAnswer);
+        if (userAnswer == questions[randomIndex].correctOption)
         {
-
-            if (userAnswer == questions[randomIndex].correctOption)
-            {
-                cout << "You guessed the right answer!" << endl;
-                score += 10;
-                cout << "Your current score is: " << score << endl;
-            }
-            else
-            {
-                cout << "Wrong answer." << endl;
-                cout << "Your current score is: " << score << endl;
-            }
-            cout << endl;
+            cout << "You guessed the right answer!" << endl;
+            score += 10;
+            cout << "Your current score is: " << score << endl;
         }
         else
         {
-            cout << "Choose a valid option!" << endl;
-            goto retryOption;
+            cout << "Wrong answer." << endl;
+            cout << "Your current score is: " << score << endl;
         }
+        cout << endl;
     }
 
     // Resets questions after all questions are asked
     for (int i = 0; i < numOfQuestions; i++)
     {
         questions[i].isAsked = false;
-    }
-}
-
-void displayLeaderboard(const vector<User> &users)
-{
-    if (users.size() > 0)
-    {
-        cout << "The current leaderboard is: " << endl;
-
-        for (int i = 0; i < users.size(); i++)
-        {
-            cout << users[i].name << " : " << users[i].score << endl;
-        }
-        cout << "----------------------------------------" << endl;
-    }
-    else
-    {
-        cout << "There are no users in the leaderboard yet." << endl;
-        cout << "----------------------------------------" << endl;
     }
 }
 
@@ -209,7 +179,7 @@ int main()
     char playAgain, newUser;
     string userName;
 
-    cout << "Please enter your first name: ";
+    cout << "Please enter your name: ";
     cin >> userName;
 
     cout << endl;
@@ -217,7 +187,21 @@ int main()
     cout << "Welcome to our Quiz Game " << userName << endl;
     cout << "----------------------------------------" << endl;
 
-    displayLeaderboard(users);
+    if (users.size() > 0)
+    {
+        cout << "The current leaderboard is: " << endl;
+
+        for (int i = 0; i < users.size(); i++)
+        {
+            cout << users[i].name << " - " << users[i].score << endl;
+        }
+        cout << "----------------------------------------" << endl;
+    }
+    else
+    {
+        cout << "There are no users in the leaderboard yet." << endl;
+        cout << "----------------------------------------" << endl;
+    }
 
 gameModeSelect:
     cout << "Select Game Mode: " << endl;
@@ -296,7 +280,11 @@ questionSelect:
                 cout << "----------------------------------------" << endl;
                 cout << "Starting a new game..." << endl;
                 cout << "----------------------------------------" << endl;
-                displayLeaderboard(users);
+                cout << "The current leaderboard is: " << endl;
+                for (int i = 0; i < users.size(); i++)
+                {
+                    cout << users[i].name << " : " << users[i].score << endl;
+                }
 
                 cout << "Please enter your name: ";
                 cin >> userName;
@@ -306,7 +294,11 @@ questionSelect:
             {
                 cout << "Thank you for playing our Quiz Game!" << endl;
             }
-            displayLeaderboard(users);
+            cout << "The current leaderboard is: " << endl;
+            for (int i = 0; i < users.size(); i++)
+            {
+                cout << users[i].name << " : " << users[i].score << endl;
+            }
         }
         break;
     case 2:
@@ -338,7 +330,11 @@ questionSelect:
                 cout << "----------------------------------------" << endl;
                 cout << "Starting a new game..." << endl;
                 cout << "----------------------------------------" << endl;
-                displayLeaderboard(users);
+                cout << "The current leaderboard is: " << endl;
+                for (int i = 0; i < users.size(); i++)
+                {
+                    cout << users[i].name << " : " << users[i].score << endl;
+                }
 
                 cout << "Please enter your name: ";
                 cin >> userName;
@@ -348,7 +344,11 @@ questionSelect:
             {
                 cout << "Thank you for playing our Quiz Game!" << endl;
             }
-            displayLeaderboard(users);
+            cout << "The current leaderboard is: " << endl;
+            for (int i = 0; i < users.size(); i++)
+            {
+                cout << users[i].name << " : " << users[i].score << endl;
+            }
         }
         break;
     case 3:
@@ -378,7 +378,11 @@ questionSelect:
                 cout << "----------------------------------------" << endl;
                 cout << "Starting a new game..." << endl;
                 cout << "----------------------------------------" << endl;
-                displayLeaderboard(users);
+                cout << "The current leaderboard is: " << endl;
+                for (int i = 0; i < users.size(); i++)
+                {
+                    cout << users[i].name << " : " << users[i].score << endl;
+                }
 
                 cout << "Please enter your name: ";
                 cin >> userName;
@@ -388,7 +392,11 @@ questionSelect:
             {
                 cout << "Thank you for playing our Quiz Game!" << endl;
             }
-            displayLeaderboard(users);
+            cout << "The current leaderboard is: " << endl;
+            for (int i = 0; i < users.size(); i++)
+            {
+                cout << users[i].name << " : " << users[i].score << endl;
+            }
         }
         break;
     default:
