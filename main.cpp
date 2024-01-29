@@ -147,9 +147,10 @@ void displayQuestions(Question questions[], int numOfQuestions, int questionsToA
         char userAnswer;
         cout << "Enter your answer: ";
         cin >> userAnswer;
-        if (userAnswer == 'a' || userAnswer == 'b' || userAnswer == 'c' || userAnswer == 'd' || userAnswer == 'A' || userAnswer == 'B' || userAnswer == 'C' || userAnswer == 'D')
+        userAnswer = toupper(userAnswer); // To transform the user input to uppercase because the answer in database is saved in uppercase.
+        if (userAnswer == 'A' || userAnswer == 'B' || userAnswer == 'C' || userAnswer == 'D')
         {
-            userAnswer = toupper(userAnswer); // To transform the user input to uppercase because the answer in database is saved in uppercase.
+
             if (userAnswer == questions[randomIndex].correctOption)
             {
                 cout << "You guessed the right answer!" << endl;
